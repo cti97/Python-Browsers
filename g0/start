@@ -1,0 +1,2 @@
+#!/bin/bash
+python goog_parse5.py
