@@ -14,7 +14,7 @@ DEFAULT_OWNER = "p10"
 DEFAULT_POLL_INTERVAL = 10  # seconds
 
 CONFIG_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), ".", ".config")
+    os.path.join(os.path.dirname(__file__), "..", ".config")
 )
 
 def _load_config(path):
@@ -39,7 +39,7 @@ if not _config:
     _config = _load_config(os.path.join(os.getcwd(), ".config"))
 
 API_BASE_URL = _config.get("API_BASE_URL", DEFAULT_API_BASE_URL)
-#SYSTEM = _config.get("SYSTEM", DEFAULT_SYSTEM)
+SYSTEM = socket.gethostname()
 OWNER = _config.get("OWNER", DEFAULT_OWNER)
 POLL_INTERVAL = int(_config.get("POLL_INTERVAL", DEFAULT_POLL_INTERVAL))
 
