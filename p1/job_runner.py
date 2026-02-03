@@ -14,7 +14,7 @@ DEFAULT_OWNER = "p10"
 DEFAULT_POLL_INTERVAL = 10  # seconds
 
 CONFIG_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", ".config")
+    os.path.join(os.path.dirname(__file__), ".", ".config")
 )
 
 def _load_config(path):
