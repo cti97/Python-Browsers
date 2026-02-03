@@ -8,7 +8,7 @@ import socket
 from datetime import datetime
 
 # Configuration
-DEFAULT_API_BASE_URL = "https://wooden-job-flow-pro.base44.app"
+DEFAULT_API_BASE_URL = "localhost:8000"
 DEFAULT_SYSTEM = socket.gethostname()
 DEFAULT_OWNER = "p10"
 DEFAULT_POLL_INTERVAL = 10  # seconds
