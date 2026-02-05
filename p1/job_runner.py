@@ -12,6 +12,7 @@ DEFAULT_API_BASE_URL = "localhost:8000"
 DEFAULT_SYSTEM = socket.gethostname()
 DEFAULT_OWNER = "p10"
 DEFAULT_POLL_INTERVAL = 10  # seconds
+DEFAULT_TOKEN = "1234567890"
 
 CONFIG_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", ".config")
@@ -42,12 +43,12 @@ API_BASE_URL = _config.get("API_BASE_URL", DEFAULT_API_BASE_URL)
 SYSTEM = socket.gethostname()
 OWNER = _config.get("OWNER", DEFAULT_OWNER)
 POLL_INTERVAL = int(_config.get("POLL_INTERVAL", DEFAULT_POLL_INTERVAL))
-
+TOKEN = _config.get("TOKEN", DEFAULT_TOKEN)
 def get_last_pending_job():
     """Fetch the last pending job from the API"""
     try:
         url = f"{API_BASE_URL}/api/functions/getLastPendingJob"
-        params = {"system": SYSTEM, "owner": OWNER}
+        params = {"system": SYSTEM, "owner": OWNER, "token": TOKEN}
         response = requests.get(url, params=params)
         response.raise_for_status()
         data = response.json()
@@ -60,7 +61,7 @@ def update_job(te_key, update_data):
     """Update job status via API"""
     try:
         url = f"{API_BASE_URL}/api/functions/updateJob"
-        payload = {"te_key": te_key, **update_data}
+        payload = {"te_key": te_key, "token": TOKEN, **update_data}
         response = requests.post(url, json=payload)
         response.raise_for_status()
         return response.json()
