@@ -125,28 +125,20 @@ def execute_job(job):
 def main():
     """Main loop to continuously check and execute jobs"""
     print(f"Job Runner started for system={SYSTEM}, owner={OWNER}")
-    print(f"Polling every {POLL_INTERVAL} seconds")
-    print("-" * 60)
-    
-    while True:
-        try:
-            # Get the last pending job
-            job = get_last_pending_job()
-            
-            if job:
-                execute_job(job)
-            else:
-                print(f"[{datetime.now()}] No pending jobs found")
-            
-            # Wait before next poll
-            time.sleep(POLL_INTERVAL)
-            
-        except KeyboardInterrupt:
-            print("\nJob runner stopped by user")
-            break
-        except Exception as e:
-            print(f"Unexpected error: {e}")
-            time.sleep(POLL_INTERVAL)
+
+    try:
+        # Get the last pending job
+        job = get_last_pending_job()
+        
+        if job:
+            execute_job(job)
+        else:
+            print(f"[{datetime.now()}] No pending jobs found")
+        
+    except KeyboardInterrupt:
+        print("\nJob runner stopped by user")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
 
 if __name__ == "__main__":
     main()
